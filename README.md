@@ -4,40 +4,12 @@
 
 ---
 
-## 변경 이력
+## 릴리즈
 
-### v0.2  (2026-02-24)
-
-**[FEAT] Phase 2 AI 도플갱어 MVP 추가**
-- 강사가 AI 인터뷰를 통해 본인의 AI 분신을 생성하는 5단계 온보딩 구현
-- 학생이 6자리 코드로 AI 강사와 실시간 스트리밍 채팅하는 UI 구현
-- Claude API(`claude-opus-4-5`) 스트리밍 연동 (`client.messages.stream`)
-- 강사 프로파일 및 대화 로그를 JSON 파일로 로컬 저장하는 스토리지 구현
-- Streamlit 멀티페이지 구조 도입 (`pages/` 디렉토리)
-
-**[FEAT] 랜딩페이지 UI 현대화**
-- 디자인 레퍼런스 : Fourmula AI, Voku Studio, Roshan Sahu (Awwwards)
-- Inter Tight 폰트, 흰 배경 (#FFFFFF), 오렌지 포인트 (#FA5D29), `clamp()` 유체 타이포 적용
-- Streamlit 테마를 라이트 모드로 전환 (`.streamlit/config.toml`)
-
-**[FIX] HTML이 코드 텍스트로 노출되는 렌더링 오류 수정**
-- 원인 : `st.markdown(unsafe_allow_html=True)`는 Markdown을 먼저 처리하므로, f-string 들여쓰기로 인해 동적 HTML 변수가 4-공백 코드블록으로 오인식됨
-- 수정 : 모든 동적 HTML 섹션을 Python 문자열 연결(`+`)로 재구성, `st.columns()` 의존 제거 후 CSS Grid로 대체
-
-**[FIX] UI 이모티콘 전면 제거**
-- `shared/config.py` : TARGET_SEGMENTS, AI_TOOLS, ONE_ON_ONE_COMPARE, CURRICULUM, PAGE_CONFIG 의 이모티콘 제거
-- `phase1_landing/components.py` : 히어로 태그, 버튼, 폼, 푸터 등 전체 제거
-- `phase1_landing/app.py` : 네비게이션 바 이모티콘 제거
-
----
-
-### v0.1  (2026-02-22)
-
-**[FEAT] Phase 1 랜딩페이지 MVP**
-- 사전 신청 폼 (이름, 이메일, 연락처, 배경, 트랙, 신청 동기, 유입 경로)
-- Google Sheets 자동 기록 (`gspread` + `google-auth`), 실패 시 CSV 폴백
-- Streamlit Cloud 배포 구성 (`streamlit_app.py` 루트 진입점)
-- `.gitignore` 및 `secrets.toml.template` 보안 설정
+| 버전 | 날짜 | 내용 |
+|---|---|---|
+| v0.2 | 2026-02-24 | Phase 2 AI 도플갱어 MVP, 랜딩페이지 UI 현대화, HTML 렌더링 버그 수정, 이모티콘 제거 |
+| v0.1 | 2026-02-22 | Phase 1 랜딩페이지 MVP, Google Sheets 연동, Streamlit Cloud 배포 구성 |
 
 ---
 
@@ -168,4 +140,51 @@ worksheet_name = "신청자"
 |---|---|---|
 | Phase 1 | 랜딩페이지 + Google Sheets 사전 신청 수집 | 완료 |
 | Phase 2 | AI 도플갱어 MVP — 강사 AI 분신 생성 및 학생 채팅 | 완료 (MVP) |
-| Phase 3 | KPI 역량 대시보드 — 학습 성과 시각화 | 예정 |
+| Phase 3 | 이커머스 역량 진단 대시보드 | 예정 (프로토타입) |
+
+---
+
+## Phase 3 — 이커머스 역량 진단 대시보드 (프로토타입 설계)
+
+이커머스 업무 역량을 진단하고, 직무·자격증·기업·일정을 한 화면에서 제공하는 개인화 대시보드.
+
+### 역량 진단 모델
+
+6각형 레이더 차트로 이커머스 핵심 역량을 시각화합니다.
+상위 6개 카테고리 아래 각 2개 세부 항목, 총 12개 지표로 구성됩니다.
+
+| 카테고리 | 세부 항목 1 | 세부 항목 2 |
+|---|---|---|
+| 퍼포먼스 마케팅 | 광고 운영 (Meta / GFA) | 데이터 분석 (GA4 / ROAS) |
+| 콘텐츠 & 브랜딩 | 카피라이팅 | 이미지 / 영상 제작 |
+| 플랫폼 운영 | 쿠팡 / 스마트스토어 | CS & 리뷰 관리 |
+| 데이터 & KPI | 지표 설계 | 대시보드 시각화 |
+| AI 도구 활용 | 프롬프트 엔지니어링 | 업무 자동화 (n8n) |
+| 공급망 & 물류 | 소싱 & 원가 계산 | 재고 / 배송 관리 |
+
+### 주요 기능 (예정)
+
+**직무 추천**
+- 진단 점수 기반으로 적합 직무 Top 3 추천 (MD / 마케터 / 오퍼레이터 등)
+- 현재 역량과 목표 직무의 갭 분석 및 단기 개선 경로 제시
+
+**자격증 & 기업 추천**
+- 부족 역량 카테고리에 대응하는 관련 자격증 목록 제시
+- 역량 프로필과 유사한 채용 중인 기업 리스트
+
+**학습 일정 캘린더**
+- 추천 자격증 시험일, 관련 컨퍼런스 / 세미나 일정을 자동 수집
+- 월간 캘린더 뷰로 정리, 개인 목표 일정 등록 기능
+
+### 예정 기술 스택
+
+```
+phase3_dashboard/
+├── app.py                  # 대시보드 진입점
+├── assessment.py           # 역량 진단 설문 및 채점 로직
+├── radar_chart.py          # Plotly 6각형 레이더 차트
+├── recommender.py          # 직무 / 자격증 / 기업 추천 엔진
+└── calendar_sync.py        # 외부 일정 수집 및 캘린더 렌더링
+```
+
+의존 패키지 : `plotly`, `pandas`, `anthropic` (추천 생성), `requests` (일정 수집)

@@ -8,6 +8,7 @@
 
 | 버전 | 날짜 | 내용 |
 |---|---|---|
+| v0.3 | 2026-02-26 | Phase 3 이커머스 역량 진단 대시보드 — 레이더 차트, 직무 추천, 자격증, 캘린더 |
 | v0.2 | 2026-02-24 | Phase 2 AI 도플갱어 MVP, 랜딩페이지 UI 현대화, HTML 렌더링 버그 수정, 이모티콘 제거 |
 | v0.1 | 2026-02-22 | Phase 1 랜딩페이지 MVP, Google Sheets 연동, Streamlit Cloud 배포 구성 |
 
@@ -31,6 +32,17 @@ commerce-x-commerce/
 ├── pages/
 │   ├── 1_강사_온보딩.py             # Streamlit 멀티페이지 : 강사용
 │   └── 2_학생_채팅.py               # Streamlit 멀티페이지 : 학생용
+├── phase3_dashboard/
+│   ├── __init__.py
+│   ├── assessment.py               # 12개 역량 설문 정의 및 채점 로직
+│   ├── radar_chart.py              # Plotly 6각형 레이더 차트
+│   ├── recommender.py              # 직무 / 자격증 / 기업 추천 엔진 (Claude AI)
+│   ├── calendar_view.py            # 2026 자격증·컨퍼런스 일정 + 목표 등록
+│   └── app.py                      # 대시보드 진입점 (소개 → 설문 → 결과)
+├── pages/
+│   ├── 1_강사_온보딩.py             # Streamlit 멀티페이지 : 강사용
+│   ├── 2_학생_채팅.py               # Streamlit 멀티페이지 : 학생용
+│   └── 3_역량진단.py                # Streamlit 멀티페이지 : 역량 진단
 ├── shared/
 │   └── config.py                   # 공통 설정 (브랜드, 모델명, 데이터)
 ├── requirements.txt
@@ -140,7 +152,7 @@ worksheet_name = "신청자"
 |---|---|---|
 | Phase 1 | 랜딩페이지 + Google Sheets 사전 신청 수집 | 완료 |
 | Phase 2 | AI 도플갱어 MVP — 강사 AI 분신 생성 및 학생 채팅 | 완료 (MVP) |
-| Phase 3 | 이커머스 역량 진단 대시보드 | 예정 (프로토타입) |
+| Phase 3 | 이커머스 역량 진단 대시보드 | 완료 (MVP) |
 
 ---
 

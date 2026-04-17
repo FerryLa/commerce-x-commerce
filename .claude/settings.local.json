@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.awwwards.com)",
+      "Bash(python:*)",
+      "Bash(C:UsersUseRAppDataLocalProgramsPythonPython313python.exe -m pip install anthropic)",
+      "Bash(cmd /c:*)",
+      "Bash(powershell -Command \"& ''C:\\\\Users\\\\UseR\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\Scripts\\\\pip.exe'' install anthropic\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(pip show plotly)",
+      "Bash(pip show streamlit)",
+      "Bash(streamlit --version)",
+      "Bash(pip show anthropic)"
+    ]
+  }
+}

@@ -1,17 +1,20 @@
 # =============================================================================
-# Commerce X Commerce — Streamlit Cloud 진입점
-# =============================================================================
-# Streamlit Cloud는 루트의 streamlit_app.py 또는 app.py를 자동 탐지합니다.
-# 이 파일은 phase1_landing/app.py 를 import하여 실행합니다.
+# Commerce X Commerce — 메인 진입점
 # =============================================================================
 
 import sys
 from pathlib import Path
 
-# 루트 경로를 sys.path에 추가 (shared, phase1_landing 모듈 접근 보장)
 ROOT = Path(__file__).parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-# Phase 1 랜딩페이지 실행
-import phase1_landing.app  # noqa: F401, E402
+import streamlit as st
+
+pg = st.navigation([
+    st.Page("pages/1_onboarding.py",  title="강사 온보딩",          icon="👨‍🏫"),
+    st.Page("pages/2_chat.py",        title="학생 채팅",             icon="💬"),
+    st.Page("pages/3_dashboard.py",   title="역량 진단",             icon="📊"),
+    st.Page("pages/4_network.py",     title="시니어 자산 네트워크",  icon="🔗"),
+])
+pg.run()

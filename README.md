@@ -2,12 +2,15 @@
 
 이커머스 산업 특화 AI 실무 인재 양성 플랫폼
 
+**라이브 데모**: [commerce-x-commerce.streamlit.app](https://commerce-x-commerce-fug7dedsec9vwj9qhyvquq.streamlit.app/)
+
 ---
 
 ## 릴리즈
 
 | 버전 | 날짜 | 내용 |
 |---|---|---|
+| v0.4 | 2026-04-17 | Phase 4 시니어·주니어 지식 자산 네트워크 — Knowledge Graph 시각화, Reputation 점수, 노인·청소년 일자리 정책 프레임 / pages 파일명 영문화 + st.navigation() 전환 |
 | v0.3 | 2026-02-26 | Phase 3 이커머스 역량 진단 대시보드 — 레이더 차트, 직무 추천, 자격증, 캘린더 |
 | v0.2 | 2026-02-24 | Phase 2 AI 도플갱어 MVP, 랜딩페이지 UI 현대화, HTML 렌더링 버그 수정, 이모티콘 제거 |
 | v0.1 | 2026-02-22 | Phase 1 랜딩페이지 MVP, Google Sheets 연동, Streamlit Cloud 배포 구성 |
@@ -18,31 +21,37 @@
 
 ```
 commerce-x-commerce/
-├── streamlit_app.py                # 루트 진입점 (Streamlit Cloud 설정값)
+├── streamlit_app.py                # 루트 진입점 — st.navigation() 멀티페이지
+├── pages/
+│   ├── 0_home.py                   # 🏠 홈 (Phase 1 랜딩페이지)
+│   ├── 1_onboarding.py             # 👨‍🏫 강사 온보딩
+│   ├── 2_chat.py                   # 💬 학생 채팅
+│   ├── 3_dashboard.py              # 📊 역량 진단
+│   └── 4_network.py                # 🔗 시니어·주니어 지식 자산 네트워크
 ├── phase1_landing/
-│   ├── app.py                      # Phase 1 랜딩페이지 메인
-│   ├── components.py               # UI 컴포넌트 (섹션별 분리)
+│   ├── app.py                      # Phase 1 랜딩페이지 컴포넌트
+│   ├── components.py               # UI 섹션별 렌더 함수
 │   └── sheets_connector.py         # Google Sheets 연동
 ├── phase2_doppelganger/
-│   ├── __init__.py
 │   ├── storage.py                  # 강사 프로파일 JSON 저장소
 │   ├── doppelganger_engine.py      # Claude API 스트리밍 엔진
 │   ├── onboarding.py               # 강사 5단계 온보딩 UI
 │   └── chat_ui.py                  # 학생 채팅 UI
-├── pages/
-│   ├── 1_강사_온보딩.py             # Streamlit 멀티페이지 : 강사용
-│   └── 2_학생_채팅.py               # Streamlit 멀티페이지 : 학생용
 ├── phase3_dashboard/
-│   ├── __init__.py
 │   ├── assessment.py               # 12개 역량 설문 정의 및 채점 로직
 │   ├── radar_chart.py              # Plotly 6각형 레이더 차트
 │   ├── recommender.py              # 직무 / 자격증 / 기업 추천 엔진 (Claude AI)
 │   ├── calendar_view.py            # 2026 자격증·컨퍼런스 일정 + 목표 등록
-│   └── app.py                      # 대시보드 진입점 (소개 → 설문 → 결과)
-├── pages/
-│   ├── 1_강사_온보딩.py             # Streamlit 멀티페이지 : 강사용
-│   ├── 2_학생_채팅.py               # Streamlit 멀티페이지 : 학생용
-│   └── 3_역량진단.py                # Streamlit 멀티페이지 : 역량 진단
+│   └── app.py                      # 대시보드 진입점
+├── phase4_senior/
+│   ├── data.py                     # Mock 데이터 (시니어·주니어·스킬·지역·문제 노드)
+│   └── app.py                      # Knowledge Graph 시각화 + Reputation 패널
+├── docs/
+│   └── senior-asset-platform/
+│       ├── README.md               # 전체 개요 + 3-Layer 아키텍처
+│       ├── knowledge-graph.md      # Neo4j 노드/관계 모델 + Cypher 쿼리
+│       ├── reputation-engine.md    # SourceCred 응용 점수 산정
+│       └── matching-algorithm.md  # 6차원 유사도 매칭 설계
 ├── shared/
 │   └── config.py                   # 공통 설정 (브랜드, 모델명, 데이터)
 ├── requirements.txt
@@ -153,6 +162,9 @@ worksheet_name = "신청자"
 | Phase 1 | 랜딩페이지 + Google Sheets 사전 신청 수집 | 완료 |
 | Phase 2 | AI 도플갱어 MVP — 강사 AI 분신 생성 및 학생 채팅 | 완료 (MVP) |
 | Phase 3 | 이커머스 역량 진단 대시보드 | 완료 (MVP) |
+| Phase 4 | 시니어·주니어 지식 자산 네트워크 — Knowledge Graph + Reputation Engine | 완료 (MVP) |
+| Phase 5 | Neo4j 실DB 연동 + 프로필 등록/관리 | 예정 |
+| Phase 6 | Reputation 자동 집계 API + 매칭 엔진 | 예정 |
 
 ---
 
